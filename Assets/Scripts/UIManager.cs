@@ -10,13 +10,55 @@ public class UIManager : MonoBehaviour
     public Text tip;
     public Text text;
 
-    private void Awake()
+    /// <summary>
+    /// 点击的开始位置
+    /// </summary>
+    Vector3 startPos;
+
+    /// <summary>
+    /// 偏移量
+    /// </summary>
+    Vector3 offset;
+
+    /// <summary>
+    /// 地图移动速度
+    /// </summary>
+    float speed = 5f;
+
+    /// <summary>
+    /// 地图物体
+    /// </summary>
+    GameObject environment;
+
+    void Awake()
     {
         if(instance == null)
         {
             instance = this;
         }
     }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            startPos = Input.mousePosition;
+
+            environment = GameObject.Find("Environment");
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            offset = Input.mousePosition - startPos;
+
+            if (offset.x != 0)
+            {
+                environment.transform.position += (offset.x < 0 ? Vector3.left : Vector3.right) * speed * Time.deltaTime;
+            }
+        }
+    }
+
+
     // 改变地图索引
     public void ChangeMapIndex()
     {
