@@ -1697,6 +1697,7 @@ MonoBehaviour:
   inputField: {fileID: 452610790}
   tip: {fileID: 1479644521}
   text: {fileID: 2018261354}
+  threshold: 100
 --- !u!4 &2043689425
 Transform:
   m_ObjectHideFlags: 0
@@ -1705,7 +1706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043689423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 428.22192, y: 345.21646, z: -25.711426}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
