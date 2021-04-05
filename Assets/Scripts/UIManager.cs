@@ -21,6 +21,16 @@ public class UIManager : MonoBehaviour
     Vector3 offset;
 
     /// <summary>
+    /// 触摸的开始位置
+    /// </summary>
+    Vector2 touchStartPos;
+
+    /// <summary>
+    /// 触摸偏移量
+    /// </summary>
+    Vector2 touchOffset;
+
+    /// <summary>
     /// 地图移动速度
     /// </summary>
     float speed = 5f;
@@ -40,6 +50,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
+
         if (Input.GetMouseButtonDown(0))
         {
             startPos = Input.mousePosition;
@@ -55,7 +67,40 @@ public class UIManager : MonoBehaviour
             {
                 environment.transform.position += (offset.x < 0 ? Vector3.left : Vector3.right) * speed * Time.deltaTime;
             }
+
+            if(offset.y != 0)
+            {
+                environment.transform.position += (offset.y < 0 ? Vector3.back : Vector3.forward) * speed * Time.deltaTime;
+            }
         }
+#else
+
+        if (Input.touchCount == 1)
+        {
+            if(Input.touches[0].phase == TouchPhase.Began)
+            {
+                touchStartPos = Input.touches[0].position;
+
+                environment = GameObject.Find("Environment");
+            }
+
+            if(Input.touches[0].phase == TouchPhase.Moved)
+            {
+                touchOffset = Input.touches[0].position - touchStartPos;
+
+                if (touchOffset.x != 0)
+                {
+                    environment.transform.position += (touchOffset.x < 0 ? Vector3.left : Vector3.right) * speed * Time.deltaTime;
+                }
+
+                if (touchOffset.y != 0)
+                {
+                    environment.transform.position += (touchOffset.y < 0 ? Vector3.back : Vector3.forward) * speed * Time.deltaTime;
+                }
+            }
+        }
+
+#endif
     }
 
 
