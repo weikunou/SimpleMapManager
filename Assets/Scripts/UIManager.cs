@@ -32,4 +32,9 @@ public class UIManager : MonoBehaviour
             tip.text = "输入的字符串不是纯数字...";
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
