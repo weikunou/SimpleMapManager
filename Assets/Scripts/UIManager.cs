@@ -11,6 +11,11 @@ public class UIManager : MonoBehaviour
     public Text text;
 
     /// <summary>
+    /// 偏移量阈值
+    /// </summary>
+    public int threshold = 150;
+
+    /// <summary>
     /// 点击的开始位置
     /// </summary>
     Vector3 startPos;
@@ -63,12 +68,12 @@ public class UIManager : MonoBehaviour
         {
             offset = Input.mousePosition - startPos;
 
-            if (offset.x != 0)
+            if (offset.x != 0 && Mathf.Abs(offset.x) > threshold)
             {
                 environment.transform.position += (offset.x < 0 ? Vector3.left : Vector3.right) * speed * Time.deltaTime;
             }
 
-            if(offset.y != 0)
+            if(offset.y != 0 && Mathf.Abs(offset.y) > threshold)
             {
                 environment.transform.position += (offset.y < 0 ? Vector3.back : Vector3.forward) * speed * Time.deltaTime;
             }
@@ -88,12 +93,12 @@ public class UIManager : MonoBehaviour
             {
                 touchOffset = Input.touches[0].position - touchStartPos;
 
-                if (touchOffset.x != 0)
+                if (touchOffset.x != 0 && Mathf.Abs(touchOffset.x) > threshold)
                 {
                     environment.transform.position += (touchOffset.x < 0 ? Vector3.left : Vector3.right) * speed * Time.deltaTime;
                 }
 
-                if (touchOffset.y != 0)
+                if (touchOffset.y != 0 && Mathf.Abs(touchOffset.y) > threshold)
                 {
                     environment.transform.position += (touchOffset.y < 0 ? Vector3.back : Vector3.forward) * speed * Time.deltaTime;
                 }
